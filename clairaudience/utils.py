@@ -18,7 +18,7 @@ def get_repo_hash(file_path, log_dir) -> str:
     repo = Repo(file_path, search_parent_directories=True)
     sha = repo.head.object.hexsha
 
-    with open(f"{log_dir}/sha.txt", "w+") as f:
+    with open("./sha.txt", "w+") as f:
         f.write(f"{sha}\n")
 
     return sha

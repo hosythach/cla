@@ -1,0 +1,43 @@
+
+  0%|                                                  | 0/2000 [00:00<?, ?it/s]/home/thachhs/anaconda3/envs/clairau/lib/python3.11/site-packages/torch/utils/checkpoint.py:31: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
+WARNING:Clairaudience:`use_cache = True` is incompatible with gradient checkpointing. Setting `use_cache = False`...
+Traceback (most recent call last):
+  File "/home/thachhs/clau/clairaudience/./clairaudience/main.py", line 131, in <module>
+    run(cfg)
+  File "/home/thachhs/clau/clairaudience/./clairaudience/main.py", line 122, in run
+    trainer.train(resume_from_checkpoint=resume_from_checkpoint)
+  File "/home/thachhs/anaconda3/envs/clairau/lib/python3.11/site-packages/transformers/trainer.py", line 1664, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/thachhs/anaconda3/envs/clairau/lib/python3.11/site-packages/transformers/trainer.py", line 1940, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/thachhs/anaconda3/envs/clairau/lib/python3.11/site-packages/transformers/trainer.py", line 2745, in training_step
+    self.scaler.scale(loss).backward()
+  File "/home/thachhs/anaconda3/envs/clairau/lib/python3.11/site-packages/torch/_tensor.py", line 487, in backward
+    torch.autograd.backward(
+  File "/home/thachhs/anaconda3/envs/clairau/lib/python3.11/site-packages/torch/autograd/__init__.py", line 200, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  File "/home/thachhs/anaconda3/envs/clairau/lib/python3.11/site-packages/torch/autograd/function.py", line 274, in apply
+    return user_fn(self, *args)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/thachhs/anaconda3/envs/clairau/lib/python3.11/site-packages/torch/utils/checkpoint.py", line 141, in backward
+    outputs = ctx.run_function(*detached_inputs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/thachhs/clau/clairaudience/clairaudience/../clairaudience/model.py", line 446, in custom_forward
+    return module(*inputs, output_attentions, use_cache)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/thachhs/anaconda3/envs/clairau/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/thachhs/clau/clairaudience/clairaudience/../clairaudience/model.py", line 223, in forward
+    hidden_states = self.fc2(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/thachhs/anaconda3/envs/clairau/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/thachhs/anaconda3/envs/clairau/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 14.00 MiB (GPU 0; 10.75 GiB total capacity; 8.20 GiB already allocated; 115.31 MiB free; 8.47 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

@@ -1,0 +1,147 @@
+{
+    "os": "Linux-5.4.0-150-generic-x86_64-with-glibc2.27",
+    "python": "3.11.5",
+    "heartbeatAt": "2023-12-20T07:09:38.457508",
+    "startedAt": "2023-12-20T07:09:36.905164",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/mtkresearch/clairaudience.git",
+        "commit": "25a6db87bfde40fe6ebf4b90f1388c7f84afbdc8"
+    },
+    "email": "luusa2k1@gmail.com",
+    "root": "/home/thachhs/clau/clairaudience",
+    "host": "bdi-anhnmt2-d",
+    "username": "thachhs",
+    "executable": "/home/thachhs/anaconda3/envs/clairau/bin/python",
+    "cpu_count": 10,
+    "cpu_count_logical": 20,
+    "cpu_freq": {
+        "current": 4.43735,
+        "min": 800.0,
+        "max": 5300.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4.815,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 2.226,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.857,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.352,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.923,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.972,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.967,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.665,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.835,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 3.182,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 3.608,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.951,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.767,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.69,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.968,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.987,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.677,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.416,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 2.923,
+            "min": 800.0,
+            "max": 5300.0
+        },
+        {
+            "current": 4.966,
+            "min": 800.0,
+            "max": 5300.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 915.3232879638672,
+            "used": 812.0277824401855
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11811160064
+        }
+    ],
+    "memory": {
+        "total": 46.957916259765625
+    }
+}

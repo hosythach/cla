@@ -29,33 +29,19 @@ def run(cfg):
     log_dir = f"{output_dir}/logging"
     cache_dir = cfg["cache_dir"] if os.path.abspath(cfg["cache_dir"]) else f"{os.getcwd()}/{cfg['cache_dir']}"
     os.makedirs(output_dir)
-    os.makedirs(log_dir)
-    os.makedirs(cache_dir, exist_ok=True)
-    json.dump(cfg, open(f"{output_dir}/cl_config.json", "w"), indent=2)
-
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(message)s",
-        handlers=[logging.FileHandler(f"{log_dir}/run.log"),
-                  RichHandler()])
-
-    logging.info(f"logs and outputs are saved to {output_dir}")
-
-    logging.info("\n" + "\n".join([f"{k}: {v}" for k,v in cfg.items()]))
-
     # Save git hash
     get_repo_hash(CUR_DIR, output_dir)
     pl.seed_everything(cfg["seed"])
 
     # Prepare model
-    logging.info(f"Start Loading Model")
+    # logging.info(f"Start Loading Model")
     model, feature_extractor, tokenizer, processor = init_model(cfg)
 
     # Prepare datasets
-    logging.info(f"Start Loading Dataset - {cfg['dataset_name']}")
+    # logging.info(f"Start Loading Dataset - {cfg['dataset_name']}")
     dataset = setup_dataset(cfg["dataset_name"], cfg["dataset_path"], feature_extractor, tokenizer, 
                             num_subsamples=cfg["num_subsamples"], 
-                            cache_file_name=f"{cache_dir}/{now}_setup_data.cache",
+                            cache_file_name=f"./outputs/{cache_dir}/{now}_setup_data.cache",
                             num_train_subsamples=cfg.get("num_train_subsamples", cfg["num_subsamples"]),
                             num_valid_subsamples=cfg.get("num_valid_subsamples", cfg["num_subsamples"]),
                             num_test_subsamples=cfg.get("num_test_subsamples", cfg["num_subsamples"]))
@@ -78,10 +64,13 @@ def run(cfg):
         eval_steps=cfg["eval_steps"],
         save_steps=cfg["save_steps"],
         logging_steps=cfg["logging_steps"],
-        report_to=["tensorboard"],
+        # report_to=["tensorboard"],
+        report_to=["wandb"],
+        hub_strategy= "all_checkpoints",
         load_best_model_at_end=False,
         greater_is_better=False,
-        push_to_hub=False,
+        push_to_hub=True,
+        save_total_limit=2,
         # prediction_loss_only=True,
         predict_with_generate=cfg.get("predict_with_generate", True), # NOTE: generation in the evaluation loop is not working atm
         num_beams=cfg["num_beams"]
@@ -92,7 +81,21 @@ def run(cfg):
         tokenizer=tokenizer,
         processor=processor
     )
+    
+    
+    os.makedirs(log_dir)
+    os.makedirs(cache_dir, exist_ok=True)
+    json.dump(cfg, open(f"{output_dir}/cl_config.json", "w"), indent=2)
 
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+        handlers=[logging.FileHandler(f"{log_dir}/run.log"),
+        RichHandler()])
+
+    logging.info(f"logs and outputs are saved to {output_dir}")
+
+    logging.info("\n" + "\n".join([f"{k}: {v}" for k,v in cfg.items()]))
     resume_from_checkpoint = cfg["resume_from_checkpoint"]
     logging.info(f"Run {'train' if cfg['train_mode'] else 'eval'} routine.")
     if not cfg["train_mode"]:
